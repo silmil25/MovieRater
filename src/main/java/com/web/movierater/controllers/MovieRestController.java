@@ -5,6 +5,8 @@ import com.web.movierater.helpers.ModelMapper;
 import com.web.movierater.models.Movie;
 import com.web.movierater.models.User;
 import com.web.movierater.models.dtos.MovieDto;
+import com.web.movierater.services.MovieEnrichmentService;
+import com.web.movierater.services.MovieEnrichmentServiceImpl;
 import com.web.movierater.services.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -20,21 +23,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @RequestMapping("/api/movies")
 public class MovieRestController {
 
     private static final String MOVIE_DELETED_MESSAGE = "Movie has been deleted with id: ";
 
     private final MovieService movieService;
+    private final MovieEnrichmentService movieEnrichmentService;
     private final AuthenticationHelper authenticationHelper;
     private final ModelMapper modelMapper;
 
     @Autowired
     public MovieRestController(MovieService movieService,
+                               MovieEnrichmentService movieEnrichmentService,
                                AuthenticationHelper authenticationHelper,
                                ModelMapper modelMapper) {
         this.movieService = movieService;
+        this.movieEnrichmentService = movieEnrichmentService;
         this.authenticationHelper = authenticationHelper;
         this.modelMapper = modelMapper;
     }
@@ -70,6 +76,7 @@ public class MovieRestController {
         }
     }
 
+    @Transactional
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid MovieDto movieDto,
                                     BindingResult bindingResult,
@@ -86,17 +93,18 @@ public class MovieRestController {
             }
 
             Movie newMovie = modelMapper.dtoToMovie(movieDto);
-            MovieDto createdMovie = modelMapper.movieToDto(
-                    movieService.create(newMovie, requester)
-            );
+            newMovie = movieService.create(newMovie, requester);
 
-            return ResponseEntity.ok(createdMovie);
+            movieEnrichmentService.enrichRatingAsync(newMovie.getId(), newMovie.getTitle());
+
+            return ResponseEntity.ok(modelMapper.movieToDto(newMovie));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(e.getMessage());
         }
     }
 
+    @Transactional
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable int id,
                                     @Valid @RequestBody MovieDto movieDto,
@@ -113,10 +121,13 @@ public class MovieRestController {
                 return ResponseEntity.badRequest().body(errors);
             }
 
-            MovieDto updatedMovie = modelMapper.movieToDto(movieService.update(
-                    id, modelMapper.dtoToMovie(movieDto), requester));
+            Movie updatedMovie = movieService.update(
+                    id, modelMapper.dtoToMovie(movieDto), requester);
 
-            return ResponseEntity.ok(updatedMovie);
+            movieEnrichmentService.enrichRatingAsync(updatedMovie.getId(),
+                    updatedMovie.getTitle());
+
+            return ResponseEntity.ok(modelMapper.movieToDto(updatedMovie));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(e.getMessage());

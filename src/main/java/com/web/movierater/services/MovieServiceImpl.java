@@ -63,6 +63,15 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public void updateRating(int id, double rating) {
+        Movie movieFromDb = movieRepository.getById(id);
+
+        movieFromDb.setRating(rating);
+
+        movieRepository.update(movieFromDb);
+    }
+
+    @Override
     public void delete(int id, User requester) {
         checkPermissionsAdmin(requester);
 

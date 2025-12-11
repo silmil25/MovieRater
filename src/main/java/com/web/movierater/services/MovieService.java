@@ -16,5 +16,7 @@ public interface MovieService {
 
     Movie update(int id, Movie updatedMovie, User requester);
 
+    void updateRating(int id, double rating);
+
     void delete(int id, User requester);
 }
