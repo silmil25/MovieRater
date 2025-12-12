@@ -45,98 +45,55 @@ public class UserRestController {
     @GetMapping
     public ResponseEntity<?> get(@RequestHeader HttpHeaders headers) {
 
-        try {
-            User requester = authenticationHelper.tryGetUser(headers);
-            List<UserDto> users = userService.get(requester).stream()
-                    .map(modelMapper::userToDto)
-                    .toList();
+        User requester = authenticationHelper.tryGetUser(headers);
+        List<UserDto> users = userService.get(requester).stream()
+                .map(modelMapper::userToDto)
+                .toList();
 
-            return ResponseEntity.ok(users);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable int id,
                                      @RequestHeader HttpHeaders headers) {
-        try {
-            User requester = authenticationHelper.tryGetUser(headers);
+        User requester = authenticationHelper.tryGetUser(headers);
 
-            UserDto user = modelMapper.userToDto(userService.getById(id, requester));
+        UserDto user = modelMapper.userToDto(userService.getById(id, requester));
 
-            return ResponseEntity.ok(user);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody @Valid RegisterDto registerDto,
-                                    BindingResult bindingResult) {
-        try {
-            if (bindingResult.hasErrors()) {
-                Map<String, String> errors = bindingResult.getFieldErrors().stream()
-                        .collect(Collectors.toMap(FieldError::getField,
-                                FieldError::getDefaultMessage));
+    public ResponseEntity<?> create(@RequestBody @Valid RegisterDto registerDto) {
 
-                return ResponseEntity.badRequest().body(errors);
-            }
-
-            if (!registerDto.getPassword().equals(registerDto.getRepeatPassword())) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(PASSWORD_CONFIRMATION_SHOULD_MATCH_ERROR);
-            }
-
-            User newUser = modelMapper.registerDtoYoUser(registerDto);
-            UserDto createdUser = modelMapper.userToDto(userService.create(newUser));
-
-            return ResponseEntity.ok(createdUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
+        if (!registerDto.getPassword().equals(registerDto.getRepeatPassword())) {
+            throw new IllegalArgumentException(PASSWORD_CONFIRMATION_SHOULD_MATCH_ERROR);
         }
+
+        User newUser = modelMapper.registerDtoYoUser(registerDto);
+        UserDto createdUser = modelMapper.userToDto(userService.create(newUser));
+
+        return ResponseEntity.ok(createdUser);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable int id,
                                     @Valid @RequestBody UserDto userDto,
-                                    BindingResult bindingResult,
                                     @RequestHeader HttpHeaders headers) {
-        try {
-            User requester = authenticationHelper.tryGetUser(headers);
+        User requester = authenticationHelper.tryGetUser(headers);
 
-            if (bindingResult.hasErrors()) {
-                Map<String, String> errors = bindingResult.getFieldErrors().stream()
-                        .collect(Collectors.toMap(FieldError::getField,
-                                FieldError::getDefaultMessage));
+        UserDto updatedUser = modelMapper.userToDto(userService.update(
+                id, modelMapper.userDtoToUser(userDto), requester));
 
-                return ResponseEntity.badRequest().body(errors);
-            }
-
-            UserDto updatedUser = modelMapper.userToDto(userService.update(
-                    id, modelMapper.userDtoToUser(userDto), requester));
-
-            return ResponseEntity.ok(updatedUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable int id,
                                                  @RequestHeader HttpHeaders headers) {
-        try {
-            User requester = authenticationHelper.tryGetUser(headers);
-            userService.delete(id, requester);
+        User requester = authenticationHelper.tryGetUser(headers);
+        userService.delete(id, requester);
 
-            return ResponseEntity.ok(USER_DELETED_MESSAGE + id);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok(USER_DELETED_MESSAGE + id);
     }
 }

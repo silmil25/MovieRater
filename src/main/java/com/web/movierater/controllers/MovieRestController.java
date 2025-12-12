@@ -48,105 +48,60 @@ public class MovieRestController {
     @GetMapping
     public ResponseEntity<?> get(@RequestHeader HttpHeaders headers) {
 
-        try {
-            authenticationHelper.tryGetUser(headers);
-            List<MovieDto> movies = movieService.get().stream()
-                    .map(modelMapper::movieToDto)
-                    .toList();
+        authenticationHelper.tryGetUser(headers);
+        List<MovieDto> movies = movieService.get().stream()
+                .map(modelMapper::movieToDto)
+                .toList();
 
-            return ResponseEntity.ok(movies);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok(movies);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable int id,
                                      @RequestHeader HttpHeaders headers) {
-        try {
-            authenticationHelper.tryGetUser(headers);
+        authenticationHelper.tryGetUser(headers);
 
-            MovieDto movie = modelMapper.movieToDto(movieService.getById(id));
+        MovieDto movie = modelMapper.movieToDto(movieService.getById(id));
 
-            return ResponseEntity.ok(movie);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok(movie);
     }
 
     @Transactional
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid MovieDto movieDto,
-                                    BindingResult bindingResult,
                                     @RequestHeader HttpHeaders headers) {
-        try {
-            User requester = authenticationHelper.tryGetUser(headers);
+        User requester = authenticationHelper.tryGetUser(headers);
 
-            if (bindingResult.hasErrors()) {
-                Map<String, String> errors = bindingResult.getFieldErrors().stream()
-                        .collect(Collectors.toMap(FieldError::getField,
-                                FieldError::getDefaultMessage));
+        Movie newMovie = modelMapper.dtoToMovie(movieDto);
+        newMovie = movieService.create(newMovie, requester);
 
-                return ResponseEntity.badRequest().body(errors);
-            }
+        movieEnrichmentService.enrichRatingAsync(newMovie.getId(), newMovie.getTitle());
 
-            Movie newMovie = modelMapper.dtoToMovie(movieDto);
-            newMovie = movieService.create(newMovie, requester);
-
-            movieEnrichmentService.enrichRatingAsync(newMovie.getId(), newMovie.getTitle());
-
-            return ResponseEntity.ok(modelMapper.movieToDto(newMovie));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok(modelMapper.movieToDto(newMovie));
     }
 
     @Transactional
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable int id,
                                     @Valid @RequestBody MovieDto movieDto,
-                                    BindingResult bindingResult,
                                     @RequestHeader HttpHeaders headers) {
-        try {
-            User requester = authenticationHelper.tryGetUser(headers);
+        User requester = authenticationHelper.tryGetUser(headers);
 
-            if (bindingResult.hasErrors()) {
-                Map<String, String> errors = bindingResult.getFieldErrors().stream()
-                        .collect(Collectors.toMap(FieldError::getField,
-                                FieldError::getDefaultMessage));
+        Movie updatedMovie = movieService.update(
+                id, modelMapper.dtoToMovie(movieDto), requester);
 
-                return ResponseEntity.badRequest().body(errors);
-            }
+        movieEnrichmentService.enrichRatingAsync(updatedMovie.getId(),
+                updatedMovie.getTitle());
 
-            Movie updatedMovie = movieService.update(
-                    id, modelMapper.dtoToMovie(movieDto), requester);
-
-            movieEnrichmentService.enrichRatingAsync(updatedMovie.getId(),
-                    updatedMovie.getTitle());
-
-            return ResponseEntity.ok(modelMapper.movieToDto(updatedMovie));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok(modelMapper.movieToDto(updatedMovie));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable int id,
                                                  @RequestHeader HttpHeaders headers) {
-        try {
-            User requester = authenticationHelper.tryGetUser(headers);
-            movieService.delete(id, requester);
+        User requester = authenticationHelper.tryGetUser(headers);
+        movieService.delete(id, requester);
 
-            return ResponseEntity.ok(MOVIE_DELETED_MESSAGE + id);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok(MOVIE_DELETED_MESSAGE + id);
     }
-
-
 }
