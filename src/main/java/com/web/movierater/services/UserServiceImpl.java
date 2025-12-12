@@ -6,6 +6,7 @@ import com.web.movierater.exceptions.EntityNotFoundException;
 import com.web.movierater.models.User;
 import com.web.movierater.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +15,13 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder encoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository,
+                           PasswordEncoder encoder) {
         this.userRepository = userRepository;
+        this.encoder = encoder;
     }
 
 
@@ -46,6 +50,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         checkUniqueUsername(user.getUsername());
+
+        String hashed = encoder.encode(user.getPassword());
+
+        user.setPassword(encoder.encode(user.getPassword()));
 
         user = userRepository.create(user);
         return user;

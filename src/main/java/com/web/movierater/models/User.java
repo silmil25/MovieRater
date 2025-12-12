@@ -26,15 +26,9 @@ public class User {
     private int id;
 
     @Column(name = "username")
-    @NotEmpty(message = USERNAME_EMPTY_ERROR)
-    @Size(min = USERNAME_MIN_LENGTH, max = USERNAME_MAX_LENGTH,
-            message = USERNAME_LENGTH_ERROR)
     private String username;
 
     @Column(name = "password")
-    @NotEmpty(message = PASSWORD_EMPTY_ERROR)
-    @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH,
-            message = PASSWORD_LENGTH_ERROR)
     private String password;
 
     @Column(name = "is_admin")

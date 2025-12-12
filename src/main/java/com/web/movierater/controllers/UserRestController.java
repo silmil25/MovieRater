@@ -1,25 +1,19 @@
 package com.web.movierater.controllers;
 
-import com.web.movierater.helpers.AuthenticationHelper;
 import com.web.movierater.helpers.ModelMapper;
+import com.web.movierater.security.CustomUserDetails;
 import com.web.movierater.models.dtos.RegisterDto;
 import com.web.movierater.models.User;
 import com.web.movierater.models.dtos.UserDto;
 import com.web.movierater.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
@@ -30,22 +24,20 @@ public class UserRestController {
     private static final String USER_DELETED_MESSAGE = "User has been deleted with id: ";
 
     private final UserService userService;
-    private final AuthenticationHelper authenticationHelper;
     private final ModelMapper modelMapper;
 
     @Autowired
     public UserRestController(UserService userService,
-                              AuthenticationHelper authenticationHelper,
                               ModelMapper modelMapper) {
         this.userService = userService;
-        this.authenticationHelper = authenticationHelper;
         this.modelMapper = modelMapper;
     }
 
     @GetMapping
-    public ResponseEntity<?> get(@RequestHeader HttpHeaders headers) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> get(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        User requester = authenticationHelper.tryGetUser(headers);
+        User requester = customUserDetails.getUser();
         List<UserDto> users = userService.get(requester).stream()
                 .map(modelMapper::userToDto)
                 .toList();
@@ -54,16 +46,17 @@ public class UserRestController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> getById(@PathVariable int id,
-                                     @RequestHeader HttpHeaders headers) {
-        User requester = authenticationHelper.tryGetUser(headers);
+                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        User requester = customUserDetails.getUser();
 
         UserDto user = modelMapper.userToDto(userService.getById(id, requester));
 
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping
+    @PostMapping("/new")
     public ResponseEntity<?> create(@RequestBody @Valid RegisterDto registerDto) {
 
         if (!registerDto.getPassword().equals(registerDto.getRepeatPassword())) {
@@ -77,10 +70,11 @@ public class UserRestController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@PathVariable int id,
                                     @Valid @RequestBody UserDto userDto,
-                                    @RequestHeader HttpHeaders headers) {
-        User requester = authenticationHelper.tryGetUser(headers);
+                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        User requester = customUserDetails.getUser();
 
         UserDto updatedUser = modelMapper.userToDto(userService.update(
                 id, modelMapper.userDtoToUser(userDto), requester));
@@ -89,9 +83,10 @@ public class UserRestController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<String> deleteUserById(@PathVariable int id,
-                                                 @RequestHeader HttpHeaders headers) {
-        User requester = authenticationHelper.tryGetUser(headers);
+                                                 @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        User requester = customUserDetails.getUser();
         userService.delete(id, requester);
 
         return ResponseEntity.ok(USER_DELETED_MESSAGE + id);
