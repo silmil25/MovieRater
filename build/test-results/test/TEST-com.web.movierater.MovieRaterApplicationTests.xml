@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.web.movierater.MovieRaterApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-12-13T10:58:25.383Z" hostname="ZEPHY" time="0.333">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.web.movierater.MovieRaterApplicationTests" time="0.333"/>
+  <system-out><![CDATA[12:58:18.345 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.web.movierater.MovieRaterApplicationTests]: MovieRaterApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+12:58:18.511 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.web.movierater.MovieRaterApplication for test class com.web.movierater.MovieRaterApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.0)
+
+2025-12-13T12:58:19.091+02:00  INFO 34844 --- [MovieRater] [    Test worker] c.w.m.MovieRaterApplicationTests         : Starting MovieRaterApplicationTests using Java 17.0.12 with PID 34844 (started by silmi in C:\Repos\MovieRater)
+2025-12-13T12:58:19.094+02:00  INFO 34844 --- [MovieRater] [    Test worker] c.w.m.MovieRaterApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2025-12-13T12:58:20.374+02:00  INFO 34844 --- [MovieRater] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-13T12:58:20.412+02:00  INFO 34844 --- [MovieRater] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 0 JPA repository interfaces.
+2025-12-13T12:58:21.216+02:00  INFO 34844 --- [MovieRater] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-13T12:58:21.926+02:00  WARN 34844 --- [MovieRater] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13T12:58:21.946+02:00  INFO 34844 --- [MovieRater] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mariadb://localhost/movierater?user=root&password=***]
+	Database driver: MariaDB Connector/J
+	Database dialect: MariaDBDialect
+	Database version: 12.1.1
+	Default catalog/schema: movierater/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-13T12:58:23.702+02:00  INFO 34844 --- [MovieRater] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-13T12:58:24.338+02:00  WARN 34844 --- [MovieRater] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-13T12:58:24.502+02:00  INFO 34844 --- [MovieRater] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-12-13T12:58:25.366+02:00  INFO 34844 --- [MovieRater] [    Test worker] c.w.m.MovieRaterApplicationTests         : Started MovieRaterApplicationTests in 6.634 seconds (process running for 8.908)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

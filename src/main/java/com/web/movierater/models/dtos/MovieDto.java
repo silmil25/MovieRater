@@ -19,6 +19,8 @@ public class MovieDto {
 
     private static final String RATING_POSITIVE_ERROR = "Rating must be positive.";
 
+    private int id;
+
     @NotNull(message = TITLE_EMPTY_ERROR)
     @Size(min = TITLE_MIN_LENGTH, max = TITLE_MAX_LENGTH,
             message = TITLE_LENGTH_ERROR)
@@ -43,6 +45,13 @@ public class MovieDto {
         this.setDirector(director);
         this.setReleaseYear(releaseYear);
         this.setRating(rating);
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

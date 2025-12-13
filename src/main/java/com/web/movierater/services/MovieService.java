@@ -6,7 +6,7 @@ import com.web.movierater.models.User;
 import java.util.List;
 
 public interface MovieService {
-    List<Movie> get();
+    List<Movie> get(String searchTitle);
 
     Movie getById(int id);
 

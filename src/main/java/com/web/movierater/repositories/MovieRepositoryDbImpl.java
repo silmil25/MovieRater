@@ -17,6 +17,9 @@ public class MovieRepositoryDbImpl implements MovieRepository {
     public static final String GET_ALL_MOVIES =
             "FROM Movie";
 
+    public static final String SEARCH_MOVIE_BY_TITLE =
+            "title like :title";
+
     public static final String GET_USER_BY_TITLE =
             "from Movie where title = :title";
 
@@ -31,9 +34,20 @@ public class MovieRepositoryDbImpl implements MovieRepository {
 
 
     @Override
-    public List<Movie> get() {
+    public List<Movie> get(String searchTitle) {
         try (Session session = sessionFactory.openSession()) {
-            Query<Movie> query =session.createQuery(GET_ALL_MOVIES, Movie.class);
+            String movieQuery = GET_ALL_MOVIES;
+
+            if (searchTitle != null && !searchTitle.isBlank()) {
+                movieQuery = movieQuery +" where " + SEARCH_MOVIE_BY_TITLE;
+            }
+
+            Query<Movie> query = session.createQuery(movieQuery, Movie.class);
+
+            if (searchTitle != null && !searchTitle.isBlank()) {
+                query.setParameter("title", String.format("%%%s%%", searchTitle));
+            }
+
             return query.list();
         }
     }

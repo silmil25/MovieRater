@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MovieRepository {
-    List<Movie> get();
+    List<Movie> get(String searchTitle);
 
     Movie getById(int id);
 

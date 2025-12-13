@@ -22,8 +22,8 @@ public class MovieServiceImpl implements MovieService {
 
 
     @Override
-    public List<Movie> get() {
-        return movieRepository.get();
+    public List<Movie> get(String searchTitle) {
+        return movieRepository.get(searchTitle);
     }
 
     @Override
@@ -56,7 +56,6 @@ public class MovieServiceImpl implements MovieService {
 
         movieFromDb.setDirector(updatedMovie.getDirector());
         movieFromDb.setReleaseYear(updatedMovie.getReleaseYear());
-        movieFromDb.setRating(updatedMovie.getRating());
 
         updatedMovie = movieRepository.update(movieFromDb);
         return updatedMovie;

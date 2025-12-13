@@ -13,7 +13,9 @@ public class ModelMapper {
     // Users to and from DTOs
 
     public UserDto userToDto (User user) {
-        return new UserDto(user.getUsername(), user.isAdmin());
+        UserDto userDto = new UserDto(user.getUsername(), user.isAdmin());
+        userDto.setId(user.getId());
+        return userDto;
     }
 
     public User registerDtoYoUser (RegisterDto register) {
@@ -27,8 +29,10 @@ public class ModelMapper {
     // Movies to and from DTOs
 
     public MovieDto movieToDto (Movie movie) {
-        return new MovieDto(movie.getTitle(), movie.getDirector(),
+        MovieDto movieDto = new MovieDto(movie.getTitle(), movie.getDirector(),
                 movie.getReleaseYear(), movie.getRating());
+        movieDto.setId(movie.getId());
+        return movieDto;
     }
 
     public Movie dtoToMovie(MovieDto movieDto) {

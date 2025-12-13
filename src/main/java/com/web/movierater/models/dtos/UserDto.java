@@ -12,6 +12,9 @@ public class UserDto {
     @NotNull(message = USERNAME_EMPTY_ERROR)
     @Size(min = USERNAME_MIN_LENGTH, max = USERNAME_MAX_LENGTH,
             message = USERNAME_LENGTH_ERROR)
+
+    private int id;
+
     private String username;
 
     private boolean isAdmin;
@@ -21,6 +24,13 @@ public class UserDto {
     public UserDto(String username, boolean isAdmin) {
         this.setUsername(username);
         this.setAdmin(isAdmin);
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

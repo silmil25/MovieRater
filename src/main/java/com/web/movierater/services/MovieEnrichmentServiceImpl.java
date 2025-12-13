@@ -35,10 +35,12 @@ public class MovieEnrichmentServiceImpl
                 .uri(buildOmdbUri(title))
                 .retrieve()
                 .bodyToMono(JsonNode.class)
-                .doOnError(e -> System.out.println(
+                .onErrorResume(e -> {System.out.println(
                         String.format(OMDB_ERROR_FORMAT,
                                 title, e.getMessage())
-                        ))
+                        );
+                    return Mono.empty();
+                })
                 .flatMap(json -> {
                     if (json.hasNonNull("imdbRating")) {
                         Double imdbRating = json.get("imdbRating").asDouble();

@@ -38,8 +38,9 @@ public class MovieRestController {
 
     @GetMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> get() {
-        List<MovieDto> movies = movieService.get().stream()
+    public ResponseEntity<?> get(
+            @RequestParam(value = "search", required = false) String searchTitle) {
+        List<MovieDto> movies = movieService.get(searchTitle).stream()
                 .map(modelMapper::movieToDto)
                 .toList();
 
