@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.333s</div>
+<div class="counter">0.412s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,7 +79,7 @@
 </thead>
 <tr>
 <td class="success">contextLoads()</td>
-<td class="success">0.333s</td>
+<td class="success">0.412s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,8 +87,8 @@
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre id="class-stdout">12:58:18.345 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.web.movierater.MovieRaterApplicationTests]: MovieRaterApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-12:58:18.511 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.web.movierater.MovieRaterApplication for test class com.web.movierater.MovieRaterApplicationTests
+<pre id="class-stdout">11:40:29.718 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.web.movierater.MovieRaterApplicationTests]: MovieRaterApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:40:29.809 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.web.movierater.MovieRaterApplication for test class com.web.movierater.MovieRaterApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -96,31 +96,19 @@
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.6)
 
- :: Spring Boot ::                (v4.0.0)
-
-2025-12-13T12:58:19.091+02:00  INFO 34844 --- [MovieRater] [    Test worker] c.w.m.MovieRaterApplicationTests         : Starting MovieRaterApplicationTests using Java 17.0.12 with PID 34844 (started by silmi in C:\Repos\MovieRater)
-2025-12-13T12:58:19.094+02:00  INFO 34844 --- [MovieRater] [    Test worker] c.w.m.MovieRaterApplicationTests         : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2025-12-13T12:58:20.374+02:00  INFO 34844 --- [MovieRater] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-12-13T12:58:20.412+02:00  INFO 34844 --- [MovieRater] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 0 JPA repository interfaces.
-2025-12-13T12:58:21.216+02:00  INFO 34844 --- [MovieRater] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
-2025-12-13T12:58:21.926+02:00  WARN 34844 --- [MovieRater] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-12-13T12:58:21.946+02:00  INFO 34844 --- [MovieRater] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [jdbc:mariadb://localhost/movierater?user=root&amp;password=***]
-	Database driver: MariaDB Connector/J
-	Database dialect: MariaDBDialect
-	Database version: 12.1.1
-	Default catalog/schema: movierater/undefined
-	Autocommit mode: undefined/unknown
-	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
-	JDBC fetch size: none
-	Pool: DatasourceConnectionProviderImpl
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-12-13T12:58:23.702+02:00  INFO 34844 --- [MovieRater] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-12-13T12:58:24.338+02:00  WARN 34844 --- [MovieRater] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-12-13T12:58:24.502+02:00  INFO 34844 --- [MovieRater] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
-2025-12-13T12:58:25.366+02:00  INFO 34844 --- [MovieRater] [    Test worker] c.w.m.MovieRaterApplicationTests         : Started MovieRaterApplicationTests in 6.634 seconds (process running for 8.908)
+2025-12-14T11:40:30.134+02:00  INFO 29684 --- [MovieRater] [    Test worker] c.w.m.MovieRaterApplicationTests         : Starting MovieRaterApplicationTests using Java 17.0.12 with PID 29684 (started by silmi in C:\Repos\MovieRater)
+2025-12-14T11:40:30.136+02:00  INFO 29684 --- [MovieRater] [    Test worker] c.w.m.MovieRaterApplicationTests         : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2025-12-14T11:40:30.907+02:00  INFO 29684 --- [MovieRater] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-14T11:40:30.930+02:00  INFO 29684 --- [MovieRater] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 JPA repository interfaces.
+2025-12-14T11:40:31.473+02:00  INFO 29684 --- [MovieRater] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.8.Final
+2025-12-14T11:40:31.534+02:00  INFO 29684 --- [MovieRater] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-12-14T11:40:31.734+02:00  WARN 29684 --- [MovieRater] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-14T11:40:32.621+02:00  INFO 29684 --- [MovieRater] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-14T11:40:33.098+02:00  WARN 29684 --- [MovieRater] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-14T11:40:33.671+02:00  INFO 29684 --- [MovieRater] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1dcc0bb8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@29767156, org.springframework.security.web.context.SecurityContextHolderFilter@6c9e7af2, org.springframework.security.web.header.HeaderWriterFilter@c651286, org.springframework.web.filter.CorsFilter@6f6998b6, org.springframework.security.web.authentication.logout.LogoutFilter@2396dc4e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2b33f7a0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@af04d6d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2740585b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@60493524, org.springframework.security.web.access.ExceptionTranslationFilter@61c42e54, org.springframework.security.web.access.intercept.AuthorizationFilter@63d43a5]
+2025-12-14T11:40:34.207+02:00  INFO 29684 --- [MovieRater] [    Test worker] c.w.m.MovieRaterApplicationTests         : Started MovieRaterApplicationTests in 4.253 seconds (process running for 5.263)
 </pre>
 <button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="class-stdout">Copy</button>
 </span>
@@ -133,7 +121,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 9.2.1</a> at Dec 13, 2025, 12:58:27 PM</p>
+<a href="https://www.gradle.org">Gradle 9.2.1</a> at Dec 14, 2025, 11:40:35 AM</p>
 </div>
 </div>
 </body>

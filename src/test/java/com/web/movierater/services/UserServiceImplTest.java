@@ -148,7 +148,8 @@ public class UserServiceImplTest {
         newUser.setPassword("plainpass");
 
         when(encoder.encode("plainpass")).thenReturn("hashedpass");
-        when(userRepository.create(any(User.class))).thenAnswer(inv -> inv.getArgument(0));
+        when(userRepository.create(any(User.class))).thenAnswer(
+                inv -> inv.getArgument(0));
 
         // act
         User result = userService.create(newUser);
@@ -194,7 +195,8 @@ public class UserServiceImplTest {
     @Test
     void update_should_throwAuthorizationException_when_requesterIsNotAdmin() {
         // act & assert
-        assertThrows(AuthorizationException.class, () -> userService.update(2, regularUser, regularUser));
+        assertThrows(AuthorizationException.class, () -> userService.update(
+                2, regularUser, regularUser));
         verify(userRepository, never()).update(any());
     }
 

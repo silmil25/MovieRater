@@ -1,8 +1,6 @@
 package com.web.movierater.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "movies")

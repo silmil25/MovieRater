@@ -1,12 +1,12 @@
 package com.web.movierater.services;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
-import tools.jackson.databind.JsonNode;
 
 import java.util.concurrent.CompletableFuture;
 

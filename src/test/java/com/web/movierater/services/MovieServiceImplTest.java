@@ -102,7 +102,6 @@ public class MovieServiceImplTest {
         assertTrue(exception.getMessage().contains("Nonexistent"));
     }
 
-    // ----------------------- CREATE METHOD -----------------------
 
     @Test
     void create_should_saveMovie_when_userIsAdmin() {
@@ -119,8 +118,6 @@ public class MovieServiceImplTest {
 
     @Test
     void create_should_throwAuthorizationException_when_userIsNotAdmin() {
-        // arrange done in setUp
-
         // act & assert
         assertThrows(AuthorizationException.class,
                 () -> movieService.create(sampleMovie, regularUser));
@@ -158,8 +155,6 @@ public class MovieServiceImplTest {
         verify(movieRepository, never()).update(any());
     }
 
-    // ----------------------- UPDATE RATING -----------------------
-
     @Test
     void updateRating_should_updateMovieRating_when_called() {
         // arrange
@@ -172,8 +167,6 @@ public class MovieServiceImplTest {
         assertEquals(9.2, sampleMovie.getRating());
         verify(movieRepository).update(sampleMovie);
     }
-
-    // ----------------------- DELETE -----------------------
 
     @Test
     void delete_should_deleteMovie_when_userIsAdmin() {

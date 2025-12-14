@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.web.movierater.services.UserServiceImplTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2025-12-13T10:58:26.346Z" hostname="ZEPHY" time="0.077">
+<testsuite name="com.web.movierater.services.UserServiceImplTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2025-12-14T09:40:35.469Z" hostname="ZEPHY" time="0.104">
   <properties/>
-  <testcase name="getById_should_returnUser_when_requesterIsAdmin()" classname="com.web.movierater.services.UserServiceImplTest" time="0.04"/>
-  <testcase name="create_should_throwDuplicateEntityException_when_usernameAlreadyExists()" classname="com.web.movierater.services.UserServiceImplTest" time="0.002"/>
+  <testcase name="getById_should_returnUser_when_requesterIsAdmin()" classname="com.web.movierater.services.UserServiceImplTest" time="0.042"/>
+  <testcase name="create_should_throwDuplicateEntityException_when_usernameAlreadyExists()" classname="com.web.movierater.services.UserServiceImplTest" time="0.003"/>
   <testcase name="get_should_returnAllUsers_when_requesterIsAdmin()" classname="com.web.movierater.services.UserServiceImplTest" time="0.003"/>
-  <testcase name="getByUsername_should_returnUser_when_userExists()" classname="com.web.movierater.services.UserServiceImplTest" time="0.002"/>
-  <testcase name="delete_should_deleteUser_when_requesterIsAdmin()" classname="com.web.movierater.services.UserServiceImplTest" time="0.002"/>
+  <testcase name="getByUsername_should_returnUser_when_userExists()" classname="com.web.movierater.services.UserServiceImplTest" time="0.003"/>
+  <testcase name="delete_should_deleteUser_when_requesterIsAdmin()" classname="com.web.movierater.services.UserServiceImplTest" time="0.003"/>
   <testcase name="getByUsername_should_throwEntityNotFoundException_when_userDoesNotExist()" classname="com.web.movierater.services.UserServiceImplTest" time="0.003"/>
-  <testcase name="delete_should_deleteUser_when_requesterIsSameUser()" classname="com.web.movierater.services.UserServiceImplTest" time="0.002"/>
-  <testcase name="getById_should_returnUser_when_requesterIsSameUser()" classname="com.web.movierater.services.UserServiceImplTest" time="0.002"/>
-  <testcase name="delete_should_throwAuthorizationException_when_requesterIsNotAdminOrSameUser()" classname="com.web.movierater.services.UserServiceImplTest" time="0.002"/>
-  <testcase name="update_should_throwDuplicateEntityException_when_newUsernameAlreadyExists()" classname="com.web.movierater.services.UserServiceImplTest" time="0.003"/>
-  <testcase name="getById_should_throwAuthorizationException_when_requesterIsNotAdminOrSameUser()" classname="com.web.movierater.services.UserServiceImplTest" time="0.002"/>
-  <testcase name="update_should_throwAuthorizationException_when_requesterIsNotAdmin()" classname="com.web.movierater.services.UserServiceImplTest" time="0.002"/>
-  <testcase name="get_should_throwAuthorizationException_when_requesterIsNotAdmin()" classname="com.web.movierater.services.UserServiceImplTest" time="0.001"/>
-  <testcase name="update_should_updateUser_when_requesterIsAdminAndUsernameIsUnique()" classname="com.web.movierater.services.UserServiceImplTest" time="0.004"/>
-  <testcase name="create_should_hashPasswordAndSaveUser_when_usernameIsUnique()" classname="com.web.movierater.services.UserServiceImplTest" time="0.002"/>
+  <testcase name="delete_should_deleteUser_when_requesterIsSameUser()" classname="com.web.movierater.services.UserServiceImplTest" time="0.003"/>
+  <testcase name="getById_should_returnUser_when_requesterIsSameUser()" classname="com.web.movierater.services.UserServiceImplTest" time="0.004"/>
+  <testcase name="delete_should_throwAuthorizationException_when_requesterIsNotAdminOrSameUser()" classname="com.web.movierater.services.UserServiceImplTest" time="0.004"/>
+  <testcase name="update_should_throwDuplicateEntityException_when_newUsernameAlreadyExists()" classname="com.web.movierater.services.UserServiceImplTest" time="0.004"/>
+  <testcase name="getById_should_throwAuthorizationException_when_requesterIsNotAdminOrSameUser()" classname="com.web.movierater.services.UserServiceImplTest" time="0.004"/>
+  <testcase name="update_should_throwAuthorizationException_when_requesterIsNotAdmin()" classname="com.web.movierater.services.UserServiceImplTest" time="0.003"/>
+  <testcase name="get_should_throwAuthorizationException_when_requesterIsNotAdmin()" classname="com.web.movierater.services.UserServiceImplTest" time="0.003"/>
+  <testcase name="update_should_updateUser_when_requesterIsAdminAndUsernameIsUnique()" classname="com.web.movierater.services.UserServiceImplTest" time="0.005"/>
+  <testcase name="create_should_hashPasswordAndSaveUser_when_usernameIsUnique()" classname="com.web.movierater.services.UserServiceImplTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

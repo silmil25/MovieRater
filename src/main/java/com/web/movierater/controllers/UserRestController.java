@@ -6,6 +6,9 @@ import com.web.movierater.models.dtos.RegisterDto;
 import com.web.movierater.models.User;
 import com.web.movierater.models.dtos.UserDto;
 import com.web.movierater.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@Tag(name = "User Controller", description = "Operations on users.")
 public class UserRestController {
 
     private static final String PASSWORD_CONFIRMATION_SHOULD_MATCH_ERROR =
@@ -35,6 +39,10 @@ public class UserRestController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(
+            summary = "Get all users",
+            description = "Operation only available for admins."
+    )
     public ResponseEntity<?> get(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
         User requester = customUserDetails.getUser();
@@ -47,6 +55,10 @@ public class UserRestController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
+    @Operation(
+            summary = "Get user by ID",
+            description = "Get a single user, by their id. If requester is admin, they can get details for any user, if the requester is not admin, they only have access to details for their own account."
+    )
     public ResponseEntity<?> getById(@PathVariable int id,
                                      @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         User requester = customUserDetails.getUser();
@@ -57,6 +69,10 @@ public class UserRestController {
     }
 
     @PostMapping("/new")
+    @Operation(
+            summary = "Registering a new user",
+            description = "Provide username, password and a matching repeat password to create a new user. USER role is assigned to all new users."
+    )
     public ResponseEntity<?> create(@RequestBody @Valid RegisterDto registerDto) {
 
         if (!registerDto.getPassword().equals(registerDto.getRepeatPassword())) {
@@ -71,6 +87,10 @@ public class UserRestController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(
+            summary = "Updating a user by ID",
+            description = "Operation only available for admins. Used to grant or remove admin rights from other users."
+    )
     public ResponseEntity<?> update(@PathVariable int id,
                                     @Valid @RequestBody UserDto userDto,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
@@ -84,6 +104,10 @@ public class UserRestController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
+    @Operation(
+            summary = "Delete a user",
+            description = "Delete a single user, by their id. If requester is admin, they can delete any user, if the requester is not admin, they only have permissions to delete their own account."
+    )
     public ResponseEntity<String> deleteUserById(@PathVariable int id,
                                                  @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         User requester = customUserDetails.getUser();

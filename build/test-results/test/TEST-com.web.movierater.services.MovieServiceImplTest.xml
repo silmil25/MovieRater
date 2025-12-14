@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.web.movierater.services.MovieServiceImplTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2025-12-13T10:58:26.268Z" hostname="ZEPHY" time="0.076">
+<testsuite name="com.web.movierater.services.MovieServiceImplTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2025-12-14T09:40:35.374Z" hostname="ZEPHY" time="0.092">
   <properties/>
-  <testcase name="delete_should_deleteMovie_when_userIsAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.045"/>
-  <testcase name="update_should_updateMovie_when_userIsAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.004"/>
-  <testcase name="delete_should_throwAuthorizationException_when_userIsNotAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.003"/>
-  <testcase name="getByTitle_should_returnMovie_when_movieExists()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.002"/>
+  <testcase name="delete_should_deleteMovie_when_userIsAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.043"/>
+  <testcase name="update_should_updateMovie_when_userIsAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.005"/>
+  <testcase name="delete_should_throwAuthorizationException_when_userIsNotAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.004"/>
+  <testcase name="getByTitle_should_returnMovie_when_movieExists()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.003"/>
   <testcase name="get_should_returnListOfMovies_when_called()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.003"/>
-  <testcase name="create_should_saveMovie_when_userIsAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.002"/>
+  <testcase name="create_should_saveMovie_when_userIsAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.003"/>
   <testcase name="updateRating_should_updateMovieRating_when_called()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.002"/>
-  <testcase name="getByTitle_should_throwEntityNotFoundException_when_movieDoesNotExist()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.002"/>
-  <testcase name="getById_should_returnMovie_when_movieExists()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.002"/>
-  <testcase name="update_should_throwAuthorizationException_when_userIsNotAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.004"/>
-  <testcase name="create_should_throwAuthorizationException_when_userIsNotAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.002"/>
+  <testcase name="getByTitle_should_throwEntityNotFoundException_when_movieDoesNotExist()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.005"/>
+  <testcase name="getById_should_returnMovie_when_movieExists()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.003"/>
+  <testcase name="update_should_throwAuthorizationException_when_userIsNotAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.005"/>
+  <testcase name="create_should_throwAuthorizationException_when_userIsNotAdmin()" classname="com.web.movierater.services.MovieServiceImplTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
