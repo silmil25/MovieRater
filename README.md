@@ -78,7 +78,7 @@ Or use Postman or similar to send API requests to localhost:8080
 
 ## Solution Structure
 
-NomadNestApp/<br>
+MovieRater <br>
 
 ├─ src/ <br>
 │  ├─ main/<br>
@@ -93,7 +93,7 @@ NomadNestApp/<br>
 │  │  │      ├─ repositories/           <br>
 │  │  │      ├─ services/               <br>
 │  │  │      ├─ security/               <br>
-│  │  │      └─ NMovieRaterApplication.java<br>
+│  │  │      └─ MovieRaterApplication.java<br>
 │  │  └─ resources/<br>
 │  │      └─  application.properties <br>
 │  └─ test/<br>
