@@ -9,12 +9,11 @@ public class UserDto {
     private static final int USERNAME_MAX_LENGTH = 30;
     private static final String USERNAME_LENGTH_ERROR = "Please provide a username between 5 and 30 characters.";
 
+    private int id;
+
     @NotNull(message = USERNAME_EMPTY_ERROR)
     @Size(min = USERNAME_MIN_LENGTH, max = USERNAME_MAX_LENGTH,
             message = USERNAME_LENGTH_ERROR)
-
-    private int id;
-
     private String username;
 
     private boolean isAdmin;
@@ -22,8 +21,13 @@ public class UserDto {
     public UserDto() {}
 
     public UserDto(String username, boolean isAdmin) {
+        this(0, username, isAdmin);
+    }
+
+    public UserDto(int id, String username, boolean isAdmin) {
+        this.setId(id);
         this.setUsername(username);
-        this.setAdmin(isAdmin);
+        this.setIsAdmin(isAdmin);
     }
 
     public int getId() {
@@ -43,7 +47,7 @@ public class UserDto {
     public boolean isAdmin() {
         return isAdmin;
     }
-    public void setAdmin(boolean admin) {
+    public void setIsAdmin(boolean admin) {
         isAdmin = admin;
     }
 }
